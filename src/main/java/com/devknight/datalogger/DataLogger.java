@@ -45,7 +45,7 @@ public class DataLogger {
                 }
             };
 
-            service = Executors.newSingleThreadScheduledExecutor();
+            service = Executors.newScheduledThreadPool(2);
             service.scheduleAtFixedRate(runnable, 0, loggerInterval, TimeUnit.SECONDS);
         }
         else {
