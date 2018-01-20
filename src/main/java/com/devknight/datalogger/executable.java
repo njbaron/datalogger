@@ -11,7 +11,7 @@ public class executable {
             DataLogger logger1 = new DataLogger(new FileIO("logger1"));
             logger1.add(new DevMPU6050("MPU6050_0"));
             logger1.start(1);
-            for(int i = 0; i < 600; i++) {
+            for(int i = 0; i < 6; i++) {
                 Thread.sleep(1000);
             }
             logger1.end();
