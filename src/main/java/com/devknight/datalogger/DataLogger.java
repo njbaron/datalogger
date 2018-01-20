@@ -13,7 +13,7 @@ public class DataLogger {
 
     private FileIO writer;
     private ArrayList<LoggerDevice> devices;
-    ScheduledExecutorService service;
+    private ScheduledExecutorService service;
     private boolean running = false;
 
     public DataLogger(FileIO writer) {
@@ -30,16 +30,22 @@ public class DataLogger {
         }
     }
 
-    public void start(int loggerInterval) {
+    public void start(int loggerInterval)  throws IOException{
         if (!running) {
             running = true;
+            writer.writeHeaders(devices);
             Runnable runnable = new Runnable() {
                 public void run() {
-                    writer.write(devices);
+                    try {
+                        writer.writeData(devices);
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             };
 
-            ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+            service = Executors.newSingleThreadScheduledExecutor();
             service.scheduleAtFixedRate(runnable, 0, loggerInterval, TimeUnit.SECONDS);
         }
         else {
@@ -47,9 +53,10 @@ public class DataLogger {
         }
     }
 
-    public void end() {
+    public void end() throws IOException{
         running = false;
         service.shutdown();
+        writer.close();
     }
 
 
