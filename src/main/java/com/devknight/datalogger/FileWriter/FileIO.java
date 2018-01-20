@@ -1,32 +1,34 @@
 package com.devknight.datalogger.FileWriter;
 
+import com.devknight.datalogger.LoggerDevice.LoggerDevice;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public abstract class FileIO {
 
-    String filePath;
-    String fileName;
-    BufferedWriter writer;
+    private String fileName;
+    private BufferedWriter writer;
+    private ArrayList<LoggerDevice> devices;
 
-    public FileIO(String filePath, String fileName) {
-        try {
-            this.filePath = filePath;
-            this.fileName = getUniqueFileName(fileName);
-            writer = new BufferedWriter(new FileWriter(this.fileName));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+    public FileIO(String fileName, String[] headers) throws IOException {
+        this.fileName = fileName;
+        writer = new BufferedWriter(new FileWriter(this.fileName));
+        write(headers);
     }
 
-    public void write(String[] data) {
+    abstract public void write(ArrayList<LoggerDevice> devices);
 
+    abstract public void write(String[] data);
+
+    public String getFileName() {
+        return fileName;
     }
 
-    private String getUniqueFileName(String requestFileName) {
-        
-        String tempPathFile =
+    public void close() throws IOException {
+        writer.close();
     }
+
 }
