@@ -6,7 +6,7 @@ import com.devknight.datalogger.LoggerDevice.LoggerDevice;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +14,7 @@ public class DataLogger {
 
     private FileIO writer;
     private ArrayList<LoggerDevice> devices;
-    private ScheduledExecutorService service;
+    private ExecutorService service;
     private ScheduledFuture<?> loggerHandle;
     private boolean running = false;
 
@@ -37,19 +37,7 @@ public class DataLogger {
         if (!running) {
             running = true;
             writer.writeHeaders(devices);
-            Runnable runnable = new Runnable() {
-                public void run() {
-                    try {
-                        writer.writeData(devices);
-                        System.out.println("write");
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-
-            loggerHandle = service.scheduleAtFixedRate(runnable,0,loggerInterval,TimeUnit.MILLISECONDS);
+            writer.writeData(devices);
         }
         else {
             System.err.println("Warning: Logger is already running.");
