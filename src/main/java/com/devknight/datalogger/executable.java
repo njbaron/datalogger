@@ -10,7 +10,7 @@ public class executable {
         try {
             DataLogger logger1 = new DataLogger(new FileIO("logger1"));
             logger1.add(new DevMPU6050("MPU6050_0"));
-            logger1.start(1000);
+            logger1.start(500);
             for(int i = 0; i < 6; i++) {
                 Thread.sleep(1000);
             }
