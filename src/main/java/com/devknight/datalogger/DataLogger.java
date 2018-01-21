@@ -51,10 +51,13 @@ public class DataLogger {
         }
     }
 
-    public void end() throws IOException{
+    public void end() throws Exception{
         running = false;
-        writer.close();
         service.shutdown();
+        while(!service.isShutdown()) {
+            Thread.sleep(50);
+        }
+        writer.close();
         System.exit(0);
     }
 
