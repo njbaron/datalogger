@@ -31,7 +31,7 @@ public class DevMPU6050 extends LoggerDevice{
         catch (Exception e) {
             e.printStackTrace();
         }
-        return new String[] {String.format("%03f", x),Double.toString(Math.round(y)), Double.toString(Math.round(z)), Double.toString(Math.round(mpu.getPitch())),Double.toString(Math.round(mpu.getRoll()))};
+        return new String[] {String.format("%0.3f", x),Double.toString(Math.round(y)), Double.toString(Math.round(z)), Double.toString(Math.round(mpu.getPitch())),Double.toString(Math.round(mpu.getRoll()))};
     }
 
 

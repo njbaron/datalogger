@@ -90,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/devknight/datalogger/LoggerDevice/DevMPU6050.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="561">
-              <caret line="33" column="49" lean-forward="false" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="49" />
+              <caret line="33" column="62" lean-forward="false" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -348,12 +348,12 @@
       <updated>1515829391596</updated>
       <workItem from="1516343370748" duration="5694000" />
       <workItem from="1516396256682" duration="11880000" />
-      <workItem from="1516476427749" duration="21437000" />
+      <workItem from="1516476427749" duration="21753000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39011000" />
+    <option name="totallyTimeSpent" value="39327000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1294" height="1417" extended-state="0" />
@@ -789,7 +789,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/devknight/datalogger/LoggerDevice/DevMPU6050.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
-          <caret line="33" column="49" lean-forward="false" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="49" />
+          <caret line="33" column="62" lean-forward="false" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
           <folding />
         </state>
       </provider>
