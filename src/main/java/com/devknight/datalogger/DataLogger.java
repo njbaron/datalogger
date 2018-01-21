@@ -5,23 +5,16 @@ import com.devknight.datalogger.LoggerDevice.LoggerDevice;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 public class DataLogger {
 
     private FileIO writer;
     private ArrayList<LoggerDevice> devices;
-    private ExecutorService service;
-    private ScheduledFuture<?> loggerHandle;
     private boolean running = false;
 
     public DataLogger(FileIO writer) {
         this.writer = writer;
         devices = new ArrayList<LoggerDevice>();
-        service = Executors.newScheduledThreadPool(1);
     }
 
     public void add(LoggerDevice device) {
@@ -46,8 +39,8 @@ public class DataLogger {
 
     public void end() throws IOException{
         running = false;
-        loggerHandle.cancel(true);
         writer.close();
+        System.exit(0);
     }
 
 
