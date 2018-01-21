@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 public class DataLogger {
@@ -14,11 +15,13 @@ public class DataLogger {
     private FileIO writer;
     private ArrayList<LoggerDevice> devices;
     private ScheduledExecutorService service;
+    private ScheduledFuture<?> loggerHandle;
     private boolean running = false;
 
     public DataLogger(FileIO writer) {
         this.writer = writer;
         devices = new ArrayList<LoggerDevice>();
+        service = Executors.newScheduledThreadPool(1);
     }
 
     public void add(LoggerDevice device) {
@@ -38,6 +41,7 @@ public class DataLogger {
                 public void run() {
                     try {
                         writer.writeData(devices);
+                        System.out.println("write");
                     }
                     catch (IOException e) {
                         e.printStackTrace();
@@ -45,8 +49,7 @@ public class DataLogger {
                 }
             };
 
-            service = Executors.newScheduledThreadPool(2);
-            service.scheduleAtFixedRate(runnable, 0, loggerInterval, TimeUnit.SECONDS);
+            loggerHandle = service.scheduleAtFixedRate(runnable,0,loggerInterval,TimeUnit.MILLISECONDS);
         }
         else {
             System.err.println("Warning: Logger is already running.");
@@ -55,7 +58,7 @@ public class DataLogger {
 
     public void end() throws IOException{
         running = false;
-        service.shutdown();
+        loggerHandle.cancel(true);
         writer.close();
     }
 
