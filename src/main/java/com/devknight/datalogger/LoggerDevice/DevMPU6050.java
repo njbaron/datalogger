@@ -24,14 +24,14 @@ public class DevMPU6050 extends LoggerDevice{
         double z = 0;
         try {
             accelData = mpu.get_accel_data();
-            x = Math.round(accelData[0]);
-            y = Math.round(accelData[1]);
-            z = Math.round(accelData[2]);
+            x = accelData[0];
+            y = accelData[1];
+            z = accelData[2];
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return new String[] {String.format("%0.3f", x),Double.toString(Math.round(y)), Double.toString(Math.round(z)), Double.toString(Math.round(mpu.getPitch())),Double.toString(Math.round(mpu.getRoll()))};
+        return new String[] {String.format("%03f", x),Double.toString(Math.round(y)), Double.toString(Math.round(z)), Double.toString(Math.round(mpu.getPitch())),Double.toString(Math.round(mpu.getRoll()))};
     }
 
 
